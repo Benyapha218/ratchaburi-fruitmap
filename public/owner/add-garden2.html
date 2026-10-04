@@ -1,230 +1,20 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>จัดการข้อมูลสวน — สวนผลไม้ จังหวัดราชบุรี</title>
-<style>
-  * {
-    box-sizing: border-box;
-  }
-
-  body {
-    margin: 0;
-    background: #f4f6f5;
-    font-family: 'Segoe UI', 'Sarabun', Tahoma, sans-serif;
-    color: #1f2937;
-  }
-
-  /* ===== Navbar ===== */
-  header.navbar {
-    background: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 32px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
-  }
-
-  .brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .brand .logo-emoji {
-    font-size: 30px;
-    line-height: 1;
-  }
-
-  .brand .brand-text h1 {
-    font-size: 20px;
-    color: #1f4d2e;
-    margin: 0;
-  }
-
-  .brand .brand-text small {
-    display: block;
-    font-size: 11px;
-    color: #17663f;
-    text-decoration: underline;
-  }
-
-  nav.main-nav {
-    display: flex;
-    align-items: center;
-    gap: 28px;
-  }
-
-  nav.main-nav a {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    text-decoration: none;
-    color: #374151;
-    font-size: 15px;
-    padding: 6px 4px;
-  }
-
-  nav.main-nav a.active {
-    background: #17663f;
-    color: #ffffff;
-    padding: 8px 16px;
-    border-radius: 8px;
-    font-weight: 600;
-  }
-
-  nav.main-nav a:hover:not(.active) {
-    color: #17663f;
-  }
-
-  .nav-icon {
-    font-size: 16px;
-  }
-
-  /* ===== Main content ===== */
-  main {
-    max-width: 1180px;
-    margin: 0 auto;
-    padding: 28px 32px 60px;
-  }
-
-  /* ===== ปุ่มกลับ ===== */
-  .toolbar {
-    margin-bottom: 20px;
-  }
-
-  .btn-outline2 {
-    background: #e5e7eb;
-    color: #374151;
-    border: none;
-    border-radius: 8px;
-    padding: 10px 20px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.15s ease;
-  }
-
-  .btn-outline2:hover { 
-    background: #d1d5db; 
-  }
-
-  /* ===== Card หลัก ===== */
-  .form-card {
-    background: #ffffff;
-    border-radius: 14px;
-    border: 1px solid #e5e7eb;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-    padding: 20px 28px;
-    margin-bottom: 16px;
-    transition: all 0.2s ease;
-  }
-
-  .form-card:hover {
-    border-color: #17663f;
-    box-shadow: 0 4px 12px rgba(23, 102, 63, 0.06);
-  }
-
-  .section-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  h2.section-title {
-    font-size: 18px;
-    color: #1f2937;
-    margin: 0;
-    padding-left: 12px;
-    border-left: 4px solid #17663f;
-  }
-
-  /* ===== Status Badges & Action Buttons ===== */
-  .status-wrap {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  /* สไตล์สถานะ: กรอกแล้ว */
-  .status-badge.completed {
-    color: #166534;
-    background: #f0fdf4;
-    border: 1px solid #bbf7d0;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  /* สไตล์สถานะ: ยังไม่กรอก */
-  .status-badge.pending {
-    color: #9a3412;
-    background: #fff7ed;
-    border: 1px solid #ffedd5;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  /* สไตล์ปุ่มกด */
-  .btn-btn-add {
-    background: #17663f;
-    color: #ffffff;
-    border: none;
-    border-radius: 8px;
-    padding: 8px 18px;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.15s ease;
-  }
-
-  .btn-btn-add:hover {
-    background: #124f31;
-  }
-
-  .btn-btn-view {
-    background: #ffffff;
-    color: #17663f;
-    border: 1px solid #17663f;
-    border-radius: 8px;
-    padding: 8px 18px;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.15s ease;
-  }
-
-  .btn-btn-view:hover {
-    background: #f0fdf4;
-  }
-
-  @media (max-width: 768px) {
-    main {
-      padding: 20px 16px 40px;
-    }
-    .section-header {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 12px;
-    }
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>จัดการข้อมูลสวน — สวนผลไม้ จังหวัดราชบุรี</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="add-garden2.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
 </head>
 <body>
 
   <header class="navbar">
     <div class="brand">
-      <span class="logo-emoji">🗺️🍊</span>
+      <img src="../img/fm.jpg" class="logo-img">
       <div class="brand-text">
         <h1>สวนผลไม้ จังหวัดราชบุรี</h1>
         <small>ท่องเที่ยวเชิงเกษตรผลไม้ จ.ราชบุรี</small>
@@ -232,21 +22,20 @@
     </div>
 
     <nav class="main-nav">
-      <a href="index.html"><span class="nav-icon">🏠</span> แดชบอร์ด</a>
-      <a href="add-garden1.html" class="active"><span class="nav-icon">🗺️</span> ข้อมูลสวน</a>
-      <a href="bookings.html"><span class="nav-icon">📋</span> การจอง</a>
-      <a href="map.html"><span class="nav-icon">📍</span> แผนที่</a>
-      <a href="account.html"><span class="nav-icon">👤</span> บัญชี</a>
+      <a href="index.html"><span> 🏠︎ </span> แดชบอร์ด</a>
+      <a href="garden-list.html" class="active"><span> 🗎 </span> ข้อมูลสวน</a>
+      <a href="bookings.html"><span> 🗓️ </span> การจอง</a>
+      <a href="map.html"><span> 🌏︎ </span> แผนที่</a>
+      <a href="account.html"><span>👤</span> บัญชี</a>
     </nav>
   </header>
 
   <main>
 
     <div class="toolbar">
-      <button type="button" class="btn-outline2" onclick="location.href='garden-list.html'">&#10094; กลับ</button>
+      <button type="button" class="btn-outline2" onclick="history.back()">&#10094; กลับ</button>
     </div>
 
-    <!-- 1. ข้อมูลสวน -->
     <div class="form-card">
       <div class="section-header">
         <h2 class="section-title">ข้อมูลสวน</h2>
@@ -257,134 +46,80 @@
       </div>
     </div>
 
-    <!-- 2. ข้อมูลมาตรฐานสวน -->
+    <div class="form-card">
+      <div class="section-header">
+        <h2 class="section-title">ข้อมูลทำการสวน</h2>
+        <div class="status-wrap" id="status-gaedenOpen">
+          <span class="status-badge pending"><span>⏳</span> ยังไม่ได้เพิ่มข้อมูล</span>
+          <button type="button" class="btn-btn-add" onclick="location.href='gaedenOpen.html'">+ เพิ่มข้อมูล</button>
+        </div>
+      </div>
+    </div>
+
     <div class="form-card">
       <div class="section-header">
         <h2 class="section-title">ข้อมูลมาตรฐานสวน</h2>
         <div class="status-wrap" id="status-standard">
           <span class="status-badge pending"><span>⏳</span> ยังไม่ได้เพิ่มข้อมูล</span>
-          <button type="button" class="btn-btn-add" onclick="location.href='form-standard.html'">+ เพิ่มข้อมูล</button>
+          <button type="button" class="btn-btn-add" onclick="location.href='standard-gaeden.html'">+ เพิ่มข้อมูล</button>
         </div>
       </div>
     </div>
 
-    <!-- 3. ข้อมูลผลไม้/ผลิตภัณฑ์ -->
     <div class="form-card">
       <div class="section-header">
-        <h2 class="section-title">ข้อมูลผลไม้/ผลิตภัณฑ์</h2>
+        <h2 class="section-title">ข้อมูลผลไม้</h2>
         <div class="status-wrap" id="status-products">
           <span class="status-badge pending"><span>⏳</span> ยังไม่ได้เพิ่มข้อมูล</span>
-          <button type="button" class="btn-btn-add" onclick="location.href='form-products.html'">+ เพิ่มข้อมูล</button>
+          <button type="button" class="btn-btn-add" onclick="location.href='type-price-fruit.html'">+ เพิ่มข้อมูล</button>
         </div>
       </div>
     </div>
 
-    <!-- 4. ข้อมูล Workshop/โปรโมชั่น -->
     <div class="form-card">
       <div class="section-header">
         <h2 class="section-title">ข้อมูล Workshop/โปรโมชั่น</h2>
         <div class="status-wrap" id="status-workshop">
           <span class="status-badge pending"><span>⏳</span> ยังไม่ได้เพิ่มข้อมูล</span>
-          <button type="button" class="btn-btn-add" onclick="location.href='form-workshop.html'">+ เพิ่มข้อมูล</button>
+          <button type="button" class="btn-btn-add" onclick="location.href='workshop-promotion.html'">+ เพิ่มข้อมูล</button>
         </div>
       </div>
     </div>
 
-    <!-- 5. ข้อมูลการจองเข้าชมสวน -->
     <div class="form-card">
       <div class="section-header">
         <h2 class="section-title">ข้อมูลการจองเข้าชมสวน</h2>
         <div class="status-wrap" id="status-booking">
           <span class="status-badge pending"><span>⏳</span> ยังไม่ได้เพิ่มข้อมูล</span>
-          <button type="button" class="btn-btn-add" onclick="location.href='form-booking-setting.html'">+ เพิ่มข้อมูล</button>
+          <button type="button" class="btn-btn-add" onclick="location.href='booking.html'">+ เพิ่มข้อมูล</button>
         </div>
       </div>
     </div>
 
-    <!-- 6. ข้อมูล Homestay -->
     <div class="form-card">
       <div class="section-header">
         <h2 class="section-title">ข้อมูล Homestay</h2>
         <div class="status-wrap" id="status-homestay">
           <span class="status-badge pending"><span>⏳</span> ยังไม่ได้เพิ่มข้อมูล</span>
-          <button type="button" class="btn-btn-add" onclick="location.href='form-homestay.html'">+ เพิ่มข้อมูล</button>
+          <button type="button" class="btn-btn-add" onclick="location.href='homestay.html'">+ เพิ่มข้อมูล</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <div class="section-header">
+        <h2 class="section-title">ข้อมูลการจอง Homestay</h2>
+        <div class="status-wrap" id="status-homestayBooking">
+          <span class="status-badge pending"><span>⏳</span> ยังไม่ได้เพิ่มข้อมูล</span>
+          <button type="button" class="btn-btn-add" onclick="location.href='homestay_booking.html'">+ เพิ่มข้อมูล</button>
         </div>
       </div>
     </div>
 
   </main>
 
-  <script>
-    // ===== สคริปต์ตรวจสอบสถานะและสลับปุ่มอัตโนมัติ =====
-    async function checkGardenStatus() {
-      try {
-        const response = await fetch('/api/owner/gardens');
-        
-        if (!response.ok) {
-          console.error('ไม่สามารถดึงข้อมูลจาก API ได้:', response.status);
-          return;
-        }
-
-        const data = await response.json();
-        console.log('ข้อมูลจาก MongoDB:', data);
-
-        const gardensList = data.gardens || [];
-        const garden = gardensList[0]; // ดึงข้อมูลสวนล่าสุดมาเช็ก
-
-        if (!garden) return; // ถ้ายังไม่มีข้อมูลสวนใน DB จะคงปุ่ม "+ เพิ่มข้อมูล" ไว้ตามเดิม
-
-        // แมปการตรวจสอบสถานะและลิงก์ของแต่ละหมวด
-        const configMap = {
-          'status-info': {
-            isCompleted: Boolean(garden.garden_name && garden.contact?.phone),
-            link: 'add-garden1.html'
-          },
-          'status-standard': {
-            isCompleted: Boolean(garden.standards && garden.standards.length > 0),
-            link: 'form-standard.html'
-          },
-          'status-products': {
-            isCompleted: Boolean(garden.products && garden.products.length > 0),
-            link: 'form-products.html'
-          },
-          'status-workshop': {
-            isCompleted: Boolean(garden.workshops && garden.workshops.length > 0),
-            link: 'form-workshop.html'
-          },
-          'status-booking': {
-            isCompleted: Boolean(garden.bookingOpen !== undefined),
-            link: 'form-booking-setting.html'
-          },
-          'status-homestay': {
-            isCompleted: Boolean(garden.hasHomestay === true),
-            link: 'form-homestay.html'
-          }
-        };
-
-        // สลับเป็นป้ายเขียว + ปุ่ม "ดูผลลัพธ์ / แก้ไข" เฉพาะหมวดที่มีข้อมูลแล้ว
-        // เปลี่ยนบรรทัดนี้ใน <script>
-      Object.keys(configMap).forEach(id => {
-        const item = configMap[id];
-        const el = document.getElementById(id);
-
-        if (el && item.isCompleted) {
-          el.innerHTML = `
-            <span class="status-badge completed"><span>✅</span> เพิ่มข้อมูลเรียบร้อย</span>
-            <button type="button" class="btn-btn-view" onclick="location.href='garden-list.html'">ดูผลลัพธ์</button>
-            
-            <!-- 🛠️ แก้ไขบรรทัดนี้: แปะ ?id=${garden._id} ต่อท้ายลิงก์หน้าฟอร์ม -->
-            <button type="button" class="btn-btn-view" onclick="location.href='${item.link}?id=${garden._id}'">แก้ไข</button>
-          `;
-        }
-      });
-
-      } catch (err) {
-        console.error('เกิดข้อผิดพลาดในการเชื่อมต่อเซิร์ฟเวอร์:', err);
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', checkGardenStatus);
-  </script>
+  <script src="auth.js"></script>
+  <script src="add-garden2.js"></script>
 
 </body>
 </html>

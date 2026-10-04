@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>สมัครเป็นผู้ใช้งาน</title>
+<link rel="stylesheet" href="login_style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+</head>
+<body>
+
+  <div class="login-card">
+    <div class="logo-placeholder">
+      <img src="../img/fm.jpg" alt="Logo">
+    </div>
+
+    <h1 class="page-title">เข้าสู่ระบบเพื่อจองสวน</h1>
+
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="username">อีเมล</label>
+        <input type="text" id="username" name="username">
+      </div>
+
+      <div class="form-group">
+        <label for="password">รหัสผ่าน</label>
+        <input type="password" id="password" name="password">
+      </div>
+
+      <button type="submit" class="login-btn" id="loginBtn">Login</button>
+    </form>
+
+    <div class="links-row">
+      <a id="registerUser">สมัครเป็นผู้ใช้งาน</a>
+      <a id="registerOwner">สมัครเป็นเจ้าของสวน</a>
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
+  <script src="login_script.js"></script>
+</body>
+</html>

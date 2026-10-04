@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>จัดการสถานะการทำการของสวน — สวนผลไม้ จังหวัดราชบุรี</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="gaedenOpen.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="brand">
+      <img src="../img/fm.jpg" class="logo-img">
+      <div class="brand-text">
+        <h1>สวนผลไม้ จังหวัดราชบุรี</h1>
+        <small>ท่องเที่ยวเชิงเกษตรผลไม้ จ.ราชบุรี</small>
+      </div>
+    </div>
+    <nav class="main-nav">
+      <a href="index.html"><span> 🏠︎ </span> แดชบอร์ด</a>
+      <a href="garden-list.html" class="active"><span> 🗎 </span> ข้อมูลสวน</a>
+      <a href="bookings.html"><span> 🗓️ </span> การจอง</a>
+      <a href="map.html"><span> 🌏︎ </span> แผนที่</a>
+      <a href="account.html"><span>👤</span> บัญชี</a>
+    </nav>
+  </header>
+
+  <div class="form-container" style="max-width: 1400px; margin: 0 auto; padding: 0 20px 40px;">
+    <div class="main-card" style="max-width: 100% !important;">
+
+      <div class="section-title">
+        จัดการสถานะการทำการของสวน
+        <span class="sub-title">(เปิด/ปิดสวน และแจ้งปัญหาให้ลูกค้าทราบ)</span>
+      </div>
+
+      <div id="formMessage"></div>
+
+      <div class="open-status-card" id="openStatusCard">
+        <label class="open-toggle">
+          <input type="checkbox" id="gardenOpenToggle" checked>
+          <span id="gardenOpenLabel">สวนเปิดทำการ</span>
+        </label>
+        <p class="open-toggle-hint" id="gardenOpenHint">ลูกค้าเห็นสวนของคุณและจองได้ตามปกติ</p>
+
+        <div class="closed-fields">
+          <div>
+            <label for="closeReason">เหตุผลที่ไม่เปิดทำการ *</label>
+            <select id="closeReason">
+              <option value="">-- เลือกเหตุผล --</option>
+              <option value="weather">สภาพอากาศ / ภัยธรรมชาติ</option>
+              <option value="no_harvest">ผลผลิตหมด / นอกฤดูกาล</option>
+              <option value="maintenance">ปรับปรุง / ซ่อมแซม</option>
+              <option value="personal">ธุระส่วนตัว</option>
+              <option value="other">อื่น ๆ</option>
+            </select>
+          </div>
+          <div>
+            <label for="closeDetail">รายละเอียดปัญหา</label>
+            <textarea id="closeDetail" rows="3" maxlength="500" placeholder="ลูกค้าจะเห็นข้อความนี้ที่หน้าหลักและหน้ารายละเอียดสวน"></textarea>
+          </div>
+          <div class="date-range">
+            <div>
+              <label for="closeFrom">ปิดตั้งแต่วันที่</label>
+              <input type="date" id="closeFrom">
+            </div>
+            <div>
+              <label for="closeTo">ถึงวันที่</label>
+              <input type="date" id="closeTo">
+            </div>
+          </div>
+          <span class="field-note">เว้นวันที่ว่างไว้ = ปิดจนกว่าคุณจะกลับมาเปิดทำการ</span>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button type="button" class="btn-save-main" id="saveBtn">บันทึกสถานะ</button>
+        <button type="button" class="btn-back-main" onclick="history.back()">กลับ</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
+  <script src="gaedenOpen.js"></script>
+
+</body>
+</html>

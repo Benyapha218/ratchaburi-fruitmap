@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>บัญชีผู้ใช้ — สวนผลไม้ จังหวัดราชบุรี</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="account.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="brand">
+      <img src="../img/fm.jpg" class="logo-img" alt="โลโก้">
+      <div class="brand-text">
+        <h1>สวนผลไม้ จังหวัดราชบุรี</h1>
+        <small>ท่องเที่ยวเชิงเกษตรผลไม้ จ.ราชบุรี</small>
+      </div>
+    </div>
+    <nav class="main-nav">
+      <a href="index.html"><span> 🏠︎ </span> แดชบอร์ด</a>
+      <a href="garden-list.html"><span> 🗎 </span> ข้อมูลสวน</a>
+      <a href="bookings.html"><span> 🗓️ </span> การจอง</a>
+      <a href="map.html"><span> 🌏︎ </span> แผนที่</a>
+      <a href="account.html" class="active"><span>👤</span> บัญชี</a>
+    </nav>
+  </header>
+
+  <div class="account-container">
+    <div class="profile-header">
+      <div class="profile-avatar" id="avatarInitial">U</div>
+      <div class="profile-info">
+        <h2 id="profileName">กำลังโหลด...</h2>
+        <p id="profileEmail">-</p>
+      </div>
+    </div>
+
+    <div class="section-title">ข้อมูลบัญชีผู้ใช้งาน</div>
+    <div id="accountMessage"></div>
+
+    <div class="info-list">
+      <div class="info-row">
+        <span class="info-label">ชื่อผู้ใช้งาน / เจ้าของสวน</span>
+        <span class="info-value" id="valName">-</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">อีเมล</span>
+        <span class="info-value" id="valEmail">-</span>
+      </div>
+    </div>
+
+    <div class="action-buttons">
+      <button type="button" class="btn-logout" id="logoutBtn"> ➜] ออกจากระบบ</button>
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
+  <script src="account.js"></script>
+
+</body>
+</html>

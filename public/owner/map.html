@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>แผนที่สวนผลไม้ — จังหวัดราชบุรี</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="map.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+</head>
+<body class="h-screen min-h-0 overflow-hidden flex flex-col bg-white text-stone-800">
+
+  <header class="navbar">
+    <div class="brand">
+      <img src="../img/fm.jpg" class="logo-img" alt="โลโก้">
+      <div class="brand-text">
+        <h1>สวนผลไม้ จังหวัดราชบุรี</h1>
+        <small>ท่องเที่ยวเชิงเกษตรผลไม้ จ.ราชบุรี</small>
+      </div>
+    </div>
+    
+    <nav class="main-nav">
+      <a href="index.html"><span> 🏠︎ </span> แดชบอร์ด</a>
+      <a href="garden-list.html"><span> 🗎 </span> ข้อมูลสวน</a>
+      <a href="bookings.html"><span> 🗓️ </span> การจอง</a>
+      <a href="map.html" class="active1"><span class="nav-icon"> 🌏︎ </span> แผนที่</a>
+      <a href="account.html"><span>👤</span> บัญชี</a>
+    </nav>
+  </header>
+
+  <main class="flex-1 flex flex-col lg:flex-row min-h-0">
+    <section class="relative flex-1 min-h-[42vh] lg:min-h-0 border-b lg:border-b-0 lg:border-r border-[#ccfbf1]">
+      <div id="map" class="absolute inset-0"></div>
+
+      <div class="absolute top-4 left-4 z-[500] flex flex-col gap-2">
+        <div class="flex items-center gap-2 rounded-lg border border-[#99f6e4] bg-white/95 backdrop-blur-sm px-3 py-2 shadow-sm">
+          <svg class="h-5 w-5 text-[#0f766e]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-4.35 7-11a7 7 0 1 0-14 0c0 6.65 7 11 7 11z"/><circle cx="12" cy="10" r="2.25"/></svg>
+          <span class="text-xs font-semibold text-[#134e4a]">จังหวัดราชบุรี</span>
+        </div>
+        <div class="flex items-center gap-2 rounded-lg border border-[#d1fae5] bg-white/95 backdrop-blur-sm px-3 py-2 shadow-sm">
+          <svg class="h-5 w-5 text-[#166534]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+          <span class="text-xs font-medium text-[#14532d]" id="pinCount">หมุดจากระบบ</span>
+        </div>
+        <button type="button" id="clearDistrictBtn" class="hidden text-xs font-medium text-[#166534] bg-white/95 border border-[#d1fae5] rounded-lg px-3 py-1.5 shadow-sm">
+          ✕ แสดงทั้งจังหวัด
+        </button>
+      </div>
+    </section>
+
+    <aside class="w-full lg:w-[400px] xl:w-[440px] shrink-0 bg-white overflow-y-auto max-h-[42vh] lg:max-h-none border-l border-[#ccfbf1] flex flex-col">
+      <div class="px-3 pt-3 pb-2">
+        <div class="relative">
+          <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#166534] pointer-events-none">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+          </span>
+          <input type="search" id="orchard-search" class="search-input" placeholder="ค้นหาชื่อสวน ที่อยู่ หรือคำในคำอธิบาย…" autocomplete="off" />
+        </div>
+      </div>
+
+      <div class="px-3 pb-2 flex flex-wrap gap-1.5">
+        <button type="button" class="text-xs font-semibold px-3 py-1 rounded-full border border-[#d1fae5] bg-white text-[#374151] hover:bg-[#f0fdf4] filter-btn active" data-filter="all">ทั้งหมด</button>
+        <button type="button" class="text-xs font-semibold px-3 py-1 rounded-full border border-[#d1fae5] bg-white text-[#374151] hover:bg-[#f0fdf4] filter-btn" data-filter="recommended">⭐ แนะนำ</button>
+        <button type="button" class="text-xs font-semibold px-3 py-1 rounded-full border border-[#d1fae5] bg-white text-[#374151] hover:bg-[#f0fdf4] filter-btn" data-filter="nearby">📍 ใกล้ฉัน</button>
+      </div>
+
+      <div class="p-4 border-b border-[#d1fae5]">
+        <h1 class="text-lg font-semibold text-[#14532d] m-0" id="listTitle">รายการสวน</h1>
+        <p class="text-xs text-[#6b7280] mt-1 m-0" id="listSubtitle">คลิกอำเภอบนแผนที่เพื่อกรองสวน</p>
+      </div>
+
+      <ul id="orchard-list" class="divide-y divide-stone-100 p-2 flex-1" role="list"></ul>
+
+      <p id="orchard-search-empty" class="hidden px-4 py-8 text-center text-sm text-[#6b7280]">
+        <span class="block font-medium text-[#374151]">ไม่พบสวนที่ตรงกับคำค้น</span>
+        <span class="block mt-2 text-xs">ลองค้นคำอื่น หรือคลิก "แสดงทั้งจังหวัด"</span>
+      </p>
+      <p id="orchard-empty" class="hidden p-6 text-center text-stone-500 text-sm">
+        ยังไม่มีสวนที่ปักหมุด — เจ้าของสวนสามารถเพิ่มพิกัดได้ที่เมนู "ข้อมูลสวน"
+      </p>
+    </aside>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="/js/map-ratchaburi-border.js"></script>
+  <script src="/js/garden-markers.js"></script>
+  <script src="map.js"></script>
+</body>
+</html>

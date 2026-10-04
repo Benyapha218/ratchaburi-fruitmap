@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>สวนผลไม้ จังหวัดราชบุรี</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="garden-detail-style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="brand">
+      <img src="../img/fm.jpg" class="logo-img">
+      <div class="brand-text">
+        <h1>สวนผลไม้ จังหวัดราชบุรี</h1>
+        <small>ท่องเที่ยวเชิงเกษตรผลไม้ จ.ราชบุรี</small>
+      </div>
+    </div>
+
+    <nav class="nav-menu">
+      <a href="home.html" class="nav-item">
+        <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg></span>
+        <span>หน้าหลัก</span>
+      </a>
+      <a href="map.html" class="nav-item active">
+        <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M9 3L3 5v16l6-2 6 2 6-2V3l-6 2-6-2z"/><path d="M9 3v16"/><path d="M15 5v16"/></svg></span>
+        <span>แผนที่</span>
+      </a>
+      <a href="my-bookings.html" class="nav-item">
+        <span class="nav-icon"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 3v18"/></svg></span>
+        <span>การจอง</span>
+      </a>
+      <a href="account.html" class="nav-item">
+        <span class="nav-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>
+        <span>บัญชี</span>
+      </a>
+    </nav>
+  </header>	
+
+  <main style="max-width: 1280px; margin: 0 auto; padding: 28px 32px 60px;">
+    <div class="toolbar1">
+      <button type="button" class="btn-outline2" onclick="history.back()">&#10094; กลับ</button>
+    </div> 
+    <div id="statusMessage">กำลังโหลดข้อมูลสวน...</div>
+    <div class="detail-card" id="detailCard" style="display:none;"></div>
+  </main>
+
+  <!-- Modal สำหรับดูรายละเอียดเสริม (มาตรฐาน, ราคา, Homestay) -->
+  <div class="modal-overlay" id="detailModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="detailModalTitle">รายละเอียด</h3>
+        <button type="button" class="modal-close" id="detailModalClose">✕</button>
+      </div>
+      <div class="modal-body" id="detailModalBody"></div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+  <script src="garden-detail.js"></script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #6b7a6b;
+    font-family: 'Segoe UI', 'Sarabun', Tahoma, sans-serif;
+    padding: 40px 20px;
+  }
+
+  .card {
+    background: #ffffff;
+    width: 100%;
+    max-width: 480px;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    padding: 40px 48px 32px;
+  }
+
+  .logo-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .logo-img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 20%;
+  }
+
+  .fruit-icon {
+    position: relative;
+    width: 70px;
+    height: 45px;
+    background: #fdeeb0;
+    border-radius: 50% 50% 45% 45%;
+    margin-bottom: 6px;
+  }
+
+  .fruit-icon span {
+    position: absolute;
+    border-radius: 50%;
+    display: block;
+  }
+
+
+  h1.title {
+    text-align: center;
+    color: #17663f;
+    font-size: 22px;
+    margin: 4px 0 4px;
+  }
+
+  p.subtitle {
+    text-align: center;
+    color: #6b7280;
+    font-size: 14px;
+    margin: 0 0 24px;
+  }
+
+  h2.section-title {
+    text-align: center;
+    color: #374151;
+    font-size: 19px;
+    margin: 0 0 4px;
+  }
+
+  p.section-subtitle {
+    text-align: center;
+    color: #6b7280;
+    font-size: 13px;
+    margin: 0 0 24px;
+  }
+
+  label {
+    display: block;
+    font-size: 14px;
+    color: #374151;
+    margin-bottom: 6px;
+    margin-top: 18px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.15s ease;
+  }
+
+  input:focus {
+    border-color: #1f7a4d;
+    box-shadow: 0 0 0 3px rgba(31, 122, 77, 0.12);
+  }
+
+  .btn-submit {
+    width: 100%;
+    margin-top: 28px;
+    padding: 14px;
+    background: #6b7a6b;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  .btn-submit:hover {
+    background: #124f31;
+  }
+
+  .btn-submit:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+  }
+
+  .footer-links {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #374151;
+  }
+
+  .footer-links a {
+    color: #374151;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .footer-links a:hover {
+    text-decoration: underline;
+  }
+
+  .footer-links .secondary {
+    display: block;
+    margin-top: 8px;
+    font-size: 13px;
+    color: #9ca3af;
+    text-decoration: none;
+  }
+
+  #formMessage {
+    text-align: center;
+    font-size: 13px;
+    margin-top: 14px;
+    min-height: 18px;
+  }

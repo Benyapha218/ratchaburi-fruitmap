@@ -1,0 +1,138 @@
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #f4f6f5; font-family: 'Sarabun', 'Segoe UI', Tahoma, sans-serif; color: #1f2937; }
+
+  header.navbar {
+    background: #ffffff; display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 32px; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06); margin-bottom: 24px; width: 100%;
+  }
+
+  .form-container { padding: 0 20px 40px; }
+
+  .main-card {
+    max-width: 800px; margin: 0 auto; background: #ffffff; border-radius: 20px;
+    border: 1px solid #d1d5db; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); padding: 32px 40px;
+  }
+
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .logo-img { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; }
+  .brand .brand-text h1 { font-size: 20px; color: #1f4d2e; margin: 0; }
+  .brand .brand-text small { display: block; font-size: 12px; color: #17663f; }
+
+  nav.main-nav { display: flex; align-items: center; gap: 20px; }
+  nav.main-nav a {
+    display: flex; align-items: center; gap: 6px; text-decoration: none; color: #374151;
+    font-size: 15px; padding: 8px 12px; border-radius: 8px;
+  }
+  nav.main-nav a.active { background: #17663f; color: #ffffff; font-weight: 600; }
+
+  .section-title {
+    font-size: 20px; font-weight: 700; color: #2d4d40; margin: 0 0 20px 0;
+    padding-left: 10px; border-left: 4px solid #2d4d40; display: flex; align-items: baseline;
+    gap: 8px; flex-wrap: wrap;
+  }
+  .section-title .sub-title { font-size: 14px; font-weight: 400; color: #6b7280; }
+
+  #formMessage { font-size: 14px; margin-bottom: 16px; }
+
+  .calendar-wrapper { display: flex; justify-content: center; margin-bottom: 24px; }
+  .calendar-card {
+    background: #f4f0eb; border-radius: 20px; padding: 20px 24px; width: 360px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06); border: 1px solid #e2ddd7;
+  }
+  .calendar-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+  .calendar-header .month-year { font-size: 16px; font-weight: 700; color: #2d4d40; }
+
+  .nav-btn {
+    width: 32px; height: 32px; background: #2d4d40; color: #ffffff; border: none;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 14px; transition: background 0.15s;
+  }
+  .nav-btn:hover:not(:disabled) { background: #1e352b; }
+  .nav-btn:disabled { background: #cccccc; cursor: not-allowed; opacity: 0.6; }
+
+  .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; row-gap: 12px; }
+  .day-name { font-size: 13px; font-weight: 700; color: #2d4d40; margin-bottom: 6px; }
+
+  .day-number {
+    font-size: 14px; font-weight: 500; color: #333333; height: 34px; width: 34px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: center; border-radius: 50%;
+    cursor: pointer; user-select: none; transition: all 0.15s;
+  }
+  .day-number:hover:not(.empty):not(.disabled) { background: #e2ddd7; }
+  .day-number.selected { background: #2d4d40 !important; color: #ffffff !important; font-weight: 700; }
+  .day-number.disabled { color: #bbbbbb; cursor: not-allowed; text-decoration: line-through; }
+  .day-number.empty { cursor: default; }
+  .day-number.has-workshop::after {
+    content: ''; display: block; width: 5px; height: 5px; border-radius: 50%;
+    background: #f59e0b; margin: 2px auto 0;
+  }
+
+  .selected-date-label { font-size: 15px; font-weight: 600; color: #555555; margin-bottom: 12px; }
+
+  .workshop-list { margin-bottom: 16px; }
+
+  .workshop-form-box {
+    border: 1px solid #d1d5db; border-radius: 16px; padding: 24px; display: grid;
+    grid-template-columns: 1fr 1.2fr; gap: 20px; background: #fff; margin-bottom: 16px; position: relative;
+  }
+
+  .workshop-date-tag {
+    position: absolute; top: -12px; left: 20px; background: #2d4d40; color: #fff;
+    font-size: 12px; font-weight: 600; padding: 3px 12px; border-radius: 10px;
+  }
+
+  .btn-remove-workshop {
+    position: absolute; top: -12px; right: 20px; width: 28px; height: 28px; border-radius: 50%;
+    border: 1px solid #fca5a5; background: #fef2f2; color: #dc2626; cursor: pointer;
+    font-size: 14px; display: flex; align-items: center; justify-content: center;
+  }
+  .btn-remove-workshop:hover { background: #fee2e2; }
+
+  .field-label { font-size: 14px; font-weight: 700; color: #2d4d40; margin-bottom: 6px; display: block; }
+
+  input[type="text"], textarea {
+    width: 100%; padding: 10px 14px; border: 1px solid #c5c9d0; border-radius: 10px;
+    font-size: 14px; outline: none;
+  }
+  textarea { height: 80px; resize: none; }
+
+  .time-range-wrap { display: flex; align-items: center; gap: 6px; margin-top: 6px; flex-wrap: wrap; }
+
+  .time-select {
+    width: 60px; height: 40px; padding: 0 6px; border: 1px solid #c5c9d0; border-radius: 10px;
+    font-size: 14px; font-family: inherit; color: #1f2937; background-color: #ffffff;
+    outline: none; cursor: pointer; text-align: center; transition: border-color 0.15s ease;
+  }
+  .time-select:focus { border-color: #17663f; box-shadow: 0 0 0 3px rgba(23, 102, 63, 0.12); }
+
+  .upload-box-workshop {
+    border: 1.5px dashed #c5c9d0; border-radius: 12px; padding: 16px; display: flex;
+    flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+    color: #6b7280; cursor: pointer; background: #fafafa; margin-top: 6px; text-align: center;
+  }
+  .upload-box-workshop:hover { border-color: #2d4d40; background: #f4f6f5; }
+
+  .btn-add-workshop-outer { display: flex; justify-content: flex-end; margin-bottom: 28px; }
+
+  .btn-add-more-main {
+    display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px;
+    border: 1px solid #a3a3a3; background: #e5e5e5; border-radius: 10px; font-size: 14px;
+    color: #404040; cursor: pointer; font-weight: 500;
+  }
+  .btn-add-more-main:hover { background: #d4d4d4; }
+
+  .action-buttons { display: flex; gap: 16px; }
+
+  .btn-save-main {
+    background: #4d6352; color: #ffffff; border: none; border-radius: 10px;
+    padding: 12px 32px; font-size: 15px; font-weight: 600; cursor: pointer;
+  }
+  .btn-save-main:hover { background: #3a4d3f; }
+  .btn-save-main:disabled { background: #9ca3af; cursor: not-allowed; }
+
+  .btn-back-main {
+    background: #ffffff; color: #374151; border: 1px solid #c5c9d0; border-radius: 10px;
+    padding: 12px 32px; font-size: 15px; font-weight: 600; cursor: pointer;
+  }
+
+  @media (max-width: 700px) { .workshop-form-box { grid-template-columns: 1fr; } }

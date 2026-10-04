@@ -4,168 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>เข้าสู่ระบบเจ้าของสวน</title>
-<style>
-  * {
-    box-sizing: border-box;
-  }
-
-  body {
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #f4f6f5;
-    font-family: 'Segoe UI', 'Sarabun', Tahoma, sans-serif;
-    padding: 40px 20px;
-  }
-
-  .card {
-    background: #ffffff;
-    width: 100%;
-    max-width: 480px;
-    border-radius: 16px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-    padding: 40px 48px 32px;
-  }
-
-  .logo-wrap {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-
-  .logo-img {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 20%;
-  }
-
-  .fruit-icon {
-    position: relative;
-    width: 70px;
-    height: 45px;
-    background: #fdeeb0;
-    border-radius: 50% 50% 45% 45%;
-    margin-bottom: 6px;
-  }
-
-  .fruit-icon span {
-    position: absolute;
-    border-radius: 50%;
-    display: block;
-  }
-
-
-  h1.title {
-    text-align: center;
-    color: #17663f;
-    font-size: 22px;
-    margin: 4px 0 4px;
-  }
-
-  p.subtitle {
-    text-align: center;
-    color: #6b7280;
-    font-size: 14px;
-    margin: 0 0 24px;
-  }
-
-  h2.section-title {
-    text-align: center;
-    color: #17663f;
-    font-size: 19px;
-    margin: 0 0 4px;
-  }
-
-  p.section-subtitle {
-    text-align: center;
-    color: #6b7280;
-    font-size: 13px;
-    margin: 0 0 24px;
-  }
-
-  label {
-    display: block;
-    font-size: 14px;
-    color: #374151;
-    margin-bottom: 6px;
-    margin-top: 18px;
-  }
-
-  input[type="text"],
-  input[type="email"],
-  input[type="password"] {
-    width: 100%;
-    padding: 12px 14px;
-    border: 1px solid #d1d5db;
-    border-radius: 10px;
-    font-size: 14px;
-    outline: none;
-    transition: border-color 0.15s ease;
-  }
-
-  input:focus {
-    border-color: #1f7a4d;
-    box-shadow: 0 0 0 3px rgba(31, 122, 77, 0.12);
-  }
-
-  .btn-submit {
-    width: 100%;
-    margin-top: 28px;
-    padding: 14px;
-    background: #17663f;
-    color: #ffffff;
-    border: none;
-    border-radius: 10px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.15s ease;
-  }
-
-  .btn-submit:hover {
-    background: #124f31;
-  }
-
-  .btn-submit:disabled {
-    background: #9ca3af;
-    cursor: not-allowed;
-  }
-
-  .footer-links {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 14px;
-    color: #374151;
-  }
-
-  .footer-links a {
-    color: #17663f;
-    font-weight: 600;
-    text-decoration: none;
-  }
-
-  .footer-links a:hover {
-    text-decoration: underline;
-  }
-
-  .footer-links .secondary {
-    display: block;
-    margin-top: 8px;
-    font-size: 13px;
-    color: #9ca3af;
-    text-decoration: none;
-  }
-
-  #formMessage {
-    text-align: center;
-    font-size: 13px;
-    margin-top: 14px;
-    min-height: 18px;
-  }
-</style>
+<link rel="stylesheet" href="login.css">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
 </head>
 <body>
 
@@ -173,9 +15,6 @@
     <div class="logo-wrap">
         <img src="../img/fm.jpg" alt="โลโก้แผนที่ท่องเที่ยวเชิงเกษตรผลไม้ ราชบุรี" class="logo-img">
     </div>
-
-    <h1 class="title">สวนผลไม้ จังหวัดราชบุรี</h1>
-    <p class="subtitle">ท่องเที่ยวเชิงเกษตรผลไม้ จ.ราชบุรี</p>
 
     <h2 class="section-title">เข้าสู่ระบบเจ้าของสวน</h2>
     <p class="section-subtitle">เข้าสู่ระบบเพื่อจัดการสวน</p>
@@ -195,63 +34,11 @@
 
     <div class="footer-links">
       ยังไม่มีบัญชีสวน? <a href="register.html">สมัครเป็นเจ้าของสวน</a>
-      <a href="../index.html" class="secondary">กลับหน้าแรก</a>
+      <a href="../customer/register.html" class="secondary">กลับหน้าแรก</a>
     </div>
   </div>
 
-  <script>
-    const form = document.getElementById('registerForm');
-    const messageBox = document.getElementById('formMessage');
-    const submitBtn = document.getElementById('submitBtn');
-
-    form.addEventListener('submit', async function (e) {
-      e.preventDefault();
-
-      const displayName = document.getElementById('displayName').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const password = document.getElementById('password').value;
-
-      if (!displayName || !email || !password) {
-        messageBox.style.color = '#dc2626';
-        messageBox.textContent = 'กรุณากรอกข้อมูลให้ครบทุกช่อง';
-        return;
-      }
-
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'กำลังสมัคร...';
-      messageBox.textContent = '';
-
-      try {
-        // ยิง request ไปที่ backend API (server.js + routes/ownerRoutes.js)
-        const response = await fetch('/api/owner/register', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ displayName, email, password })
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-          messageBox.style.color = '#17663f';
-          messageBox.textContent = 'สมัครสำเร็จ! กำลังพาไปหน้าเข้าสู่ระบบ...';
-          form.reset();
-          setTimeout(() => {
-            window.location.href = 'login.html';
-          }, 1200);
-        } else {
-          messageBox.style.color = '#dc2626';
-          messageBox.textContent = data.error || 'เกิดข้อผิดพลาด กรุณาลองใหม่';
-        }
-      } catch (err) {
-        messageBox.style.color = '#dc2626';
-        messageBox.textContent = 'เชื่อมต่อเซิร์ฟเวอร์ไม่ได้ กรุณาตรวจสอบว่า server กำลังรันอยู่';
-        console.error(err);
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'สมัครเจ้าของสวน';
-      }
-    });
-  </script>
+  <script src="login.js"></script>
 
 </body>
 </html>

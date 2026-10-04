@@ -1,0 +1,296 @@
+:root {
+  --forest-green: #4a5c4a;
+  --forest-green-dark: #3d4d3d;
+  --cream-bg: #f2ede3;
+  --cream-border: #e0d8c8;
+  --off-white: #faf9f6;
+  --text-dark: #2f3a2f;
+  --text-muted: #6b7a6b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--off-white);
+  font-family: 'Sarabun', 'Noto Sans Thai', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text-dark);
+}
+
+  header.navbar {
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 32px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  }
+  .logo-img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 5%;
+  }
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .brand .logo-emoji {
+    font-size: 30px;
+    line-height: 1;
+  }
+  .brand .brand-text h1 {
+    font-size: 20px;
+    color: #1f4d2e;
+    margin: 0;
+  }
+
+  .brand .brand-text small {
+    display: block;
+    font-size: 11px;
+    color: #17663f;
+    text-decoration: underline;
+  }
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  color: var(--text-dark);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.nav-item:hover {
+  background: #f5f5f0;
+  color: #4b6455;
+}
+
+.nav-item.active {
+  border-color: var(--forest-green);
+  background: #f5f5f0;
+  color: var(--forest-green-dark);
+}
+
+.nav-icon {
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-icon svg {
+  width: 100%;
+  height: 100%;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.page-content {
+  padding: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.recommend-section {
+  background: var(--cream-bg);
+  border: 1px solid var(--cream-border);
+  border-radius: 20px;
+  padding: 28px 28px 36px;
+}
+
+.section-title {
+  color: var(--forest-green-dark);
+  font-size: 24px;
+  font-weight: 800;
+  margin: 0 0 20px;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+.carousel-wrapper {
+  position: relative;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 8px;
+  cursor: grab;
+  scrollbar-width: thin;
+  scrollbar-color: var(--forest-green) transparent;
+}
+
+.carousel-track.dragging {
+  cursor: grabbing;
+  scroll-behavior: auto;
+}
+
+.carousel-track::-webkit-scrollbar {
+  height: 8px;
+}
+
+.carousel-track::-webkit-scrollbar-thumb {
+  background: var(--forest-green);
+  border-radius: 8px;
+}
+
+.carousel-track::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.garden-card {
+  flex: 0 0 auto;
+  width: 300px;
+  text-align: center;
+  user-select: none;
+}
+
+.garden-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 16px;
+  display: block;
+  pointer-events: none;
+}
+
+.garden-name {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--forest-green-dark);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+
+.carousel-nav {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.carousel-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: var(--forest-green-dark);
+  color: #fff;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.carousel-btn:hover {
+  background: var(--forest-green);
+}
+
+/*ปุ่มดูรายละเอียดประวัติการจอง*/
+.title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.title-row .section-title {
+  margin: 0;
+}
+
+
+#checkBookingBtn {
+  background: var(--forest-green-dark);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  white-space: nowrap;
+}
+
+#checkBookingBtn:hover {
+  background: var(--forest-green);
+}
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  .modal-content {
+    background: #ffffff;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    position: relative;
+  }
+  .modal-close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: #6b7280;
+  }
+  .modal-close:hover {
+    color: #111827;
+  }
+
+@media (max-width: 600px) {
+  .nav-item span {
+    display: none;
+  }
+  .garden-card {
+    width: 240px;
+  }
+}

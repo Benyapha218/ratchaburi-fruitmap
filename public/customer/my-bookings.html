@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>การจองของฉัน - สวนผลไม้ จังหวัดราชบุรี</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="my-bookings-style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="brand">
+      <img src="../img/fm.jpg" class="logo-img" alt="โลโก้">
+      <div class="brand-text">
+        <h1>สวนผลไม้ จังหวัดราชบุรี</h1>
+        <small>ท่องเที่ยวเชิงเกษตรผลไม้ จ.ราชบุรี</small>
+      </div>
+    </div>
+
+    <nav class="nav-menu">
+      <a href="home.html" class="nav-item">
+        <span class="nav-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
+        </span>
+        <span>หน้าหลัก</span>
+      </a>
+      <a href="map.html" class="nav-item">
+        <span class="nav-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 3L3 5v16l6-2 6 2 6-2V3l-6 2-6-2z"/><path d="M9 3v16"/><path d="M15 5v16"/></svg>
+        </span>
+        <span>แผนที่</span>
+      </a>
+      <a href="my-bookings.html" class="nav-item active">
+        <span class="nav-icon">
+          <svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 3v18"/></svg>
+        </span>
+        <span>การจอง</span>
+      </a>
+      <a href="account.html" class="nav-item">
+        <span class="nav-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+        </span>
+        <span>บัญชี</span>
+      </a>
+    </nav>
+  </header>
+
+  <main class="page-content">
+    <div class="title-row">
+      <h2 class="section-title">รายการจองของฉัน</h2>
+      <button type="button" id="checkBookingBtn" onclick="openHistoryModal()">ประวัติการจอง</button>
+    </div>
+    <div id="myBookingsContainer" style="display: flex; flex-direction: column; gap: 16px; margin-top: 20px;">
+    </div>
+  </main>
+
+  <div id="historyModal" class="modal-overlay">
+    <div class="modal-content">
+      <button type="button" class="modal-close" onclick="closeHistoryModal()">&times;</button>
+      <h3 style="font-size: 20px; font-weight: 700; color: #1f2937; margin-bottom: 16px;">ประวัติการจองทั้งหมด</h3>
+      <div id="historyModalBody" style="display: flex; flex-direction: column; gap: 12px;">
+      </div>
+    </div>
+  </div>
+
+  <script src="my-bookings.js"></script>
+</body>
+</html>

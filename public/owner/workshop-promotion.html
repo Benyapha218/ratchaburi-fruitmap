@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workshop / โปรโมชั่น — สวนผลไม้ จังหวัดราชบุรี</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="workshop-promotion.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="brand">
+      <img src="../img/fm.jpg" class="logo-img">
+      <div class="brand-text">
+        <h1>สวนผลไม้ จังหวัดราชบุรี</h1>
+        <small>ท่องเที่ยวเชิงเกษตรผลไม้ จ.ราชบุรี</small>
+      </div>
+    </div>
+    <nav class="main-nav">
+      <a href="index.html"><span> 🏠︎ </span> แดชบอร์ด</a>
+      <a href="garden-list.html" class="active"><span> 🗎 </span> ข้อมูลสวน</a>
+      <a href="bookings.html"><span> 🗓️ </span> การจอง</a>
+      <a href="map.html"><span> 🌏︎ </span> แผนที่</a>
+      <a href="account.html"><span>👤</span> บัญชี</a>
+    </nav>
+  </header>
+
+  <div class="form-container">
+    <div class="main-card">
+
+      <div class="section-title">
+        Workshop / โปรโมชั่น
+        <span class="sub-title">(กดเลือกวันในปฏิทิน แล้วกด "+ เพิ่ม Workshop" เพื่อเพิ่มรายการของวันนั้น)</span>
+      </div>
+
+      <div id="formMessage"></div>
+
+      <div class="calendar-wrapper">
+        <div class="calendar-card">
+          <div class="calendar-header">
+            <button type="button" class="nav-btn" id="prevMonthBtn">◀</button>
+            <div class="month-year" id="monthYearLabel"></div>
+            <button type="button" class="nav-btn" id="nextMonthBtn">▶</button>
+          </div>
+          <div class="calendar-grid" id="calendarGrid">
+            <div class="day-name">อา</div><div class="day-name">จ</div><div class="day-name">อ</div>
+            <div class="day-name">พ</div><div class="day-name">พฤ</div><div class="day-name">ศ</div><div class="day-name">ส</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="selected-date-label" id="selectedDateDisplay"></div>
+
+      <div class="workshop-list" id="workshopList"></div>
+
+      <div class="btn-add-workshop-outer">
+        <button type="button" class="btn-add-more-main" id="addWorkshopBtn">
+          <span style="font-size: 16px;">+</span> เพิ่ม Workshop / โปรโมชั่น สำหรับวันที่เลือก
+        </button>
+      </div>
+
+      <div class="action-buttons">
+        <button type="button" class="btn-save-main" id="saveBtn">บันทึกข้อมูล</button>
+        <button type="button" class="btn-back-main" onclick="history.back()">กลับ</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
+  <script src="workshop-promotion.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>แผนที่สวนผลไม้ — จังหวัดราชบุรี</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="register.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+</head>
+<body>
+
+  <div class="login-card">
+    <div class="logo-placeholder">
+      <img src="../img/fm.jpg" alt="Logo">
+    </div>
+
+    <h2 class="page-title">สมัครเป็นผู้ใช้งาน</h2>
+    <p class="section-subtitle">สร้างบัญชีเพื่อค้นหาและจองสวนผลไม้</p>
+
+    <form id="registerForm">
+        <div class="form-group">
+            <label for="displayName">ชื่อที่แสดง</label>
+            <input type="text" id="displayName" name="displayName" placeholder="เช่น คุณสมชาย" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">อีเมล</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">รหัสผ่าน</label>
+            <input type="password" id="password" name="password" placeholder="อย่างน้อย 6 ตัวอักษร" minlength="6" required>
+        </div>
+
+        <button type="submit" class="login-btn" id="submitBtn">สมัครสมาชิก</button>
+
+      <div id="formMessage"></div>
+    </form>
+
+    <div class="links-row">
+      มีบัญชีแล้ว? <a href="login.html">เข้าสู่ระบบ</a>
+    </div>
+  </div>
+
+  <script src="register.js"></script>
+</body>
+</html>

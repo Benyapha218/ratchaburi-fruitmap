@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ข้อมูลสวน — สวนผลไม้ จังหวัดราชบุรี</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="homestay.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="brand">
+      <img src="../img/fm.jpg" class="logo-img">
+      <div class="brand-text">
+        <h1>สวนผลไม้ จังหวัดราชบุรี</h1>
+        <small>ท่องเที่ยวเชิงเกษตรผลไม้ จ.ราชบุรี</small>
+      </div>
+    </div>
+
+    <nav class="main-nav">
+      <a href="index.html"><span> 🏠︎ </span> แดชบอร์ด</a>
+      <a href="garden-list.html" class="active"><span> 🗎 </span> ข้อมูลสวน</a>
+      <a href="bookings.html"><span> 🗓️ </span> การจอง</a>
+      <a href="map.html"><span> 🌏︎ </span> แผนที่</a>
+      <a href="account.html"><span>👤</span> บัญชี</a>
+    </nav>
+  </header>
+
+  <div class="form-container">
+    <h2 class="section-title spaced">เพิ่ม Homestay</h2>
+
+    <div id="homestayList">
+      <div class="homestay-item" data-index="0">
+        <div class="fruit-price-grid" style="grid-template-columns: 2fr 1.5fr 1fr !important;">
+          <div>
+            <label class="field-label">ชื่อ Homestay</label>
+            <input type="text" class="hs-name" placeholder="กรอกชื่อ Homestay">
+          </div>
+
+          <div>
+            <label class="field-label">ประเภทห้อง</label>
+            <input type="text" class="hs-roomtype" placeholder="กรอกชื่อประเภทห้อง">
+          </div>
+
+          <div>
+            <label class="field-label">จำนวนห้อง</label>
+            <input type="text" class="hs-roomcount" placeholder="กรอกจำนวนห้อง">
+          </div>
+        </div>
+
+        <div style="margin-top: 20px;">
+          <label class="field-label">รูป Homestay (เพิ่มได้หลายรูป)</label>
+          <div class="image-upload-container">
+            <label class="upload-btn-mini" style="width: 150px !important;">
+              <span class="upload-btn-text">🖼️ เพิ่มรูปภาพ</span>
+              <input type="file" class="hs-image-input" accept="image/*" multiple hidden>
+            </label>
+            <div class="hs-image-preview-list" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;"></div>
+          </div>
+        </div>
+
+        <div style="margin-top: 20px;">
+          <label class="field-label">รูปภายในห้อง (เพิ่มได้หลายรูป)</label>
+          <div class="image-upload-container">
+            <label class="upload-btn-mini" style="width: 150px !important;">
+              <span class="upload-btn-text">🖼️ เพิ่มรูปภาพ</span>
+              <input type="file" class="hs-interior-input" accept="image/*" multiple hidden>
+            </label>
+            <div class="hs-interior-preview-list" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;"></div>
+          </div>
+        </div>
+
+        <div style="margin-top: 20px; width: 100%;">
+          <label class="field-label">รายละเอียด Homestay</label>
+          <textarea class="hs-desc" placeholder="กรอกรายละเอียด Homestay"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" id="btnAddHomestay" class="btn-add-more">
+      <span class="icon-plus">+</span> เพิ่ม Homestay
+    </button>
+
+    <div class="action-buttons">
+      <button type="button" id="btnSaveHomestay" class="btn-save-main">บันทึกข้อมูล</button>
+      <button type="button" class="btn-back-main" onclick="history.back()">กลับ</button>
+    </div>
+    <div id="homestayMessage" style="margin-top: 14px;"></div>
+  </div>
+
+  <script src="auth.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+  <script src="homestay.js"></script>
+
+</body>
+</html>
