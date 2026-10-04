@@ -37,21 +37,21 @@ app.use('/api/customer', reviewRoutes);
 // <-- จุดที่ 2: เพิ่ม Route สำหรับเปิดหน้า HTML ตรงนี้
 // ==========================================
 
-// หน้าแรกเริ่มต้น (/) -> ให้ชี้ไปที่หน้าหลักของนักท่องเที่ยว/ลูกค้า
-// (เปลี่ยนชื่อไฟล์ 'index.html' ให้ตรงกับชื่อไฟล์ HTML หน้าแรกที่คุณมีในโฟลเดอร์ public)
+// 1. หน้าแรก (/) ชี้ไปที่ไฟล์หลักของ customer
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'customer', 'index.html')); 
+  // หากไฟล์ด้านในไม่ได้ชื่อ index.html ให้เปลี่ยนเป็นชื่อไฟล์จริง เช่น 'customer.html'
 });
 
-// ทางเข้าหน้าฝั่งเจ้าของสวน (/owner)
-// (เปลี่ยนชื่อไฟล์ 'owner-login.html' หรือ 'login.html' ให้ตรงกับไฟล์ที่มีใน public)
-app.get('/owner', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'login.html'));
-});
-
-// ทางเข้าหน้าฝั่งลูกค้าโดยตรง (/customer) (ถ้ามี)
+// 2. หน้าฝั่งลูกค้า (/customer)
 app.get('/customer', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'customer.html'));
+  res.sendFile(path.join(__dirname, 'public', 'customer', 'index.html'));
+});
+
+// 3. หน้าฝั่งเจ้าของสวน (/owner)
+app.get('/owner', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'owner', 'index.html')); 
+  // หรือชื่อไฟล์หน้าแรกของฝั่ง owner เช่น 'login.html' หรือ 'dashboard.html'
 });
 
 // ==========================================
