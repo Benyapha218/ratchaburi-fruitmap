@@ -37,21 +37,19 @@ app.use('/api/customer', reviewRoutes);
 // <-- จุดที่ 2: เพิ่ม Route สำหรับเปิดหน้า HTML ตรงนี้
 // ==========================================
 
-// 1. หน้าแรก (/) ชี้ไปที่ไฟล์หลักของ customer
+// 1. หน้าแรกของเว็บไซต์ (/) -> ชี้ไปที่หน้าหลักของลูกค้า (home.html)
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'customer', 'index.html')); 
-  // หากไฟล์ด้านในไม่ได้ชื่อ index.html ให้เปลี่ยนเป็นชื่อไฟล์จริง เช่น 'customer.html'
+  res.sendFile(path.join(__dirname, 'public', 'customer', 'home.html'));
 });
 
-// 2. หน้าฝั่งลูกค้า (/customer)
+// 2. หน้าฝั่งลูกค้า (/customer) -> ชี้ไปที่ home.html เช่นกัน
 app.get('/customer', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'customer', 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'customer', 'home.html'));
 });
 
-// 3. หน้าฝั่งเจ้าของสวน (/owner)
+// 3. หน้าฝั่งเจ้าของสวน (/owner) -> ชี้ไปที่หน้า index.html ของฝั่ง owner
 app.get('/owner', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'owner', 'index.html')); 
-  // หรือชื่อไฟล์หน้าแรกของฝั่ง owner เช่น 'login.html' หรือ 'dashboard.html'
+  res.sendFile(path.join(__dirname, 'public', 'owner', 'index.html'));
 });
 
 // ==========================================
