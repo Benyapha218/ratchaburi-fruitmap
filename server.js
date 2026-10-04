@@ -20,6 +20,8 @@ app.use(express.json());
 
 // serve ไฟล์ frontend ทั้งหมดจากโฟลเดอร์ public
 app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public', 'customer')));
+app.use(express.static(path.join(__dirname, 'public', 'owner')));
 
 // เส้นทาง API สำหรับเจ้าของสวน
 app.use('/api/owner', ownerRoutes);
