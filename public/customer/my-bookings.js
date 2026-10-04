@@ -307,8 +307,79 @@ async function openHistoryModal() {
   modal.style.display = 'flex';
 }
 
+// ตัวแปรสำหรับจำว่ากำลังรีวิวรายการจอง ID ไหน
+let currentReviewBookingId = null;
+
+// ฟังก์ชันเปิด Modal เขียนรีวิว
+function openReviewModal(bookingId, gardenName) {
+  currentReviewBookingId = bookingId;
+
+  // ตรวจสอบว่าในหน้า HTML มี modal รีวิวหรือยัง ถ้ายังไม่มีให้สร้างขึ้นมาอัตโนมัติ
+  let modal = document.getElementById('reviewModal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'reviewModal';
+    modal.style.cssText = 'display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center; padding: 20px;';
+    modal.innerHTML = `
+      <div style="background: #ffffff; width: 100%; max-width: 420px; border-radius: 16px; padding: 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); position: relative;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <h3 id="modalGardenTitle" style="margin: 0; font-size: 18px; color: #1f2937; font-weight: 700;">เขียนรีวิว</h3>
+          <button type="button" onclick="closeReviewModal()" style="background: none; border: none; font-size: 20px; cursor: pointer; color: #6b7280;">✕</button>
+        </div>
+        
+        <div style="margin-bottom: 14px;">
+          <label style="display: block; font-size: 13.5px; font-weight: 600; color: #374151; margin-bottom: 6px;">ให้คะแนนความพึงพอใจ:</label>
+          <select id="modalRating" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px; outline: none;">
+            <option value="5">⭐⭐⭐⭐⭐ 5 ดาว (ยอดเยี่ยม)</option>
+            <option value="4">⭐⭐⭐⭐ 4 ดาว (ดีมาก)</option>
+            <option value="3">⭐⭐⭐ 3 ดาว (ปานกลาง)</option>
+            <option value="2">⭐⭐ 2 ดาว (พอใช้)</option>
+            <option value="1">⭐ 1 ดาว (ต้องปรับปรุง)</option>
+          </select>
+        </div>
+
+        <div style="margin-bottom: 18px;">
+          <label style="display: block; font-size: 13.5px; font-weight: 600; color: #374151; margin-bottom: 6px;">ความคิดเห็นเพิ่มเติม:</label>
+          <textarea id="modalComment" rows="4" placeholder="บอกเล่าความประทับใจ การบริการ หรือผลไม้ในสวน..." style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px; outline: none; box-sizing: border-box; resize: vertical;"></textarea>
+        </div>
+
+        <div style="display: flex; gap: 10px;">
+          <button type="button" onclick="closeReviewModal()" style="flex: 1; padding: 10px; border: 1px solid #d1d5db; background: #f3f4f6; color: #374151; border-radius: 8px; font-weight: 600; cursor: pointer;">ยกเลิก</button>
+          <button type="button" id="btnSubmitReview" onclick="handleReviewSubmit()" style="flex: 1; padding: 10px; border: none; background: #17663f; color: #ffffff; border-radius: 8px; font-weight: 700; cursor: pointer;">ส่งรีวิว</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+  }
+
+  const titleEl = document.getElementById('modalGardenTitle');
+  if (titleEl) titleEl.textContent = `เขียนรีวิว: ${gardenName}`;
+  
+  // รีเซ็ตค่าฟอร์ม
+  const ratingEl = document.getElementById('modalRating');
+  const commentEl = document.getElementById('modalComment');
+  if (ratingEl) ratingEl.value = '5';
+  if (commentEl) commentEl.value = '';
+
+  modal.style.display = 'flex';
+}
+
+// ฟังก์ชันปิด Modal เขียนรีวิว
+function closeReviewModal() {
+  const modal = document.getElementById('reviewModal');
+  if (modal) modal.style.display = 'none';
+  currentReviewBookingId = null;
+}
+
+// ฟังก์ชันเรียกเมื่อกดส่งรีวิว
+async function handleReviewSubmit() {
+  if (!currentReviewBookingId) return;
+  await submitReview(currentReviewBookingId);
+}
+
+// ฟังก์ชันส่งรีวิวไป Backend
 async function submitReview(bookingId) {
-  const rating = document.getElementById('modalRating').value;
+  const rating = Number(document.getElementById('modalRating').value);
   const comment = document.getElementById('modalComment').value.trim();
   
   const token = localStorage.getItem('token') || localStorage.getItem('customer_token');
@@ -318,6 +389,12 @@ async function submitReview(bookingId) {
     alert('กรุณาเข้าสู่ระบบใหม่อีกครั้งเพื่อยืนยันตัวตน');
     window.location.href = 'login.html';
     return;
+  }
+
+  const submitBtn = document.getElementById('btnSubmitReview');
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'กำลังส่ง...';
   }
 
   try {
@@ -342,10 +419,15 @@ async function submitReview(bookingId) {
 
     alert('ส่งรีวิวสำเร็จ! ขอบคุณสำหรับความคิดเห็นครับ');
     closeReviewModal();
-    await openHistoryModal();
+    await openHistoryModal(); // รีเฟรช Modal ประวัติการจองให้ขึ้นปุ่ม "⭐ รีวิวแล้ว"
   } catch (err) {
     console.error('Submit review error:', err);
     alert('เกิดข้อผิดพลาดในการส่งรีวิว');
+  } finally {
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'ส่งรีวิว';
+    }
   }
 }
 
