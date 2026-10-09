@@ -72,9 +72,9 @@ if (type === 'standard') {
           certificates: currentGarden.certInput || []
         }] : []);
 
-    title = 'มาตรฐานสวน';
+  title = 'มาตรฐานสวน';
     if (standardsList.length === 0) {
-      bodyHtml = `<div style="font-size:12.5px; color:#9ca3af; padding: 14px 0; text-align: center; background: #ffffff; border-radius: 8px; margin-top: 8px;">📋 ยังไม่มีข้อมูลมาตรฐานสวน</div>`;
+      bodyHtml = `<div style="font-size:12.5px; color:#9ca3af; padding: 14px 0; text-align: center; background: #ffffff; border-radius: 8px;">📋 ยังไม่มีข้อมูลมาตรฐานสวน</div>`;
     } else {
       bodyHtml = `
         <div class="workshop-list">
@@ -84,22 +84,30 @@ if (type === 'standard') {
             const certs = Array.isArray(std.certificates) ? std.certificates : (std.certificate ? [std.certificate] : []);
 
             return `
-              <div class="workshop-mini-item2" style="margin-bottom: 12px; flex-direction: column; align-items: flex-start;">
-                <div style="font-weight: 700; color: #17663f; margin-bottom: 4px;">มาตรฐานที่ ${index + 1}</div>${std.reg_num ? `<div class="workshop-mini-title"><strong>ชื่อมาตรฐาน:</strong> ${escapeHtml(std.reg_num)}</div>` : ''}
-                ${std.standard_detail ? `<div class="workshop-mini-desc" style="margin-top: 4px;"><strong>รายละเอียด:</strong> ${escapeHtml(std.standard_detail)}</div>` : ''}
+              <div class="workshop-mini-item2" style="margin-bottom: 12px; flex-direction: column; align-items: flex-start; padding: 14px 16px;">
+                <div style="font-weight: 700; color: #17663f; font-size: 15px; margin-bottom: 4px;">มาตรฐานที่ ${index + 1}</div>${std.reg_num ? `<div class="workshop-mini-title" style="font-size: 14px;"><strong>ชื่อมาตรฐาน:</strong> ${escapeHtml(std.reg_num)}</div>` : ''}
+                ${std.standard_detail ? `<div class="workshop-mini-desc" style="margin-top: 4px; font-size: 13px; color: #4b5563;"><strong>รายละเอียด:</strong> ${escapeHtml(std.standard_detail)}</div>` : ''}
                 
                 <!-- ส่วนแสดงรูปโลโก้และใบรับรอง -->
-                <div style="display: flex; gap: 12px; margin-top: 8px; flex-wrap: wrap;">
+                <div style="display: flex; gap: 16px; margin-top: 12px; flex-wrap: wrap; align-items: flex-start;">
                   ${logos.length > 0 ? `
                     <div>
-                      <div style="font-size: 12px; color: #4b5563; margin-bottom: 2px;">โลโก้มาตรฐาน:</div>
-                      <img src="${logos[0]}" style="width: 70px; height: 70px; object-fit: cover; border-radius: 6px; border: 1px solid #ddd;">
+                      <div style="font-size: 12px; font-weight: 600; color: #4b5563; margin-bottom: 4px;">โลโก้มาตรฐาน:</div>
+                      <img src="${logos[0]}" 
+                           onclick="openImagePreview('${logos[0]}', 'โลโก้มาตรฐาน: ${escapeHtml(std.reg_num || '')}')"
+                           title="คลิกเพื่อดูภาพขนาดใหญ่"
+                           style="width: 95px; height: 95px; object-fit: contain; background: #ffffff; padding: 4px; border-radius: 8px; border: 1px solid #d1d5db; box-shadow: 0 1px 3px rgba(0,0,0,0.08); cursor: pointer; transition: transform 0.15s ease;">
                     </div>
                   ` : ''}
                   ${certs.length > 0 ? `
                     <div>
-                      <div style="font-size: 12px; color: #4b5563; margin-bottom: 2px;">ใบรับรอง:</div>
-                      <img src="${certs[0]}" style="width: 70px; height: 70px; object-fit: cover; border-radius: 6px; border: 1px solid #ddd;">
+                      <div style="font-size: 12px; font-weight: 600; color: #4b5563; margin-bottom: 4px;">ใบรับรองมาตรฐาน:</div>
+                      <div style="position: relative; display: inline-block; cursor: pointer;" onclick="openImagePreview('${certs[0]}', 'ใบรับรอง: ${escapeHtml(std.reg_num || '')}')">
+                        <img src="${certs[0]}" 
+                             title="คลิกเพื่อดูภาพขนาดใหญ่"
+                             style="width: 95px; height: 120px; object-fit: cover; background: #ffffff; border-radius: 8px; border: 1px solid #d1d5db; box-shadow: 0 1px 3px rgba(0,0,0,0.08); display: block;">
+                        <span style="position: absolute; bottom: 4px; right: 4px; background: rgba(0,0,0,0.65); color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 4px;">ดูเพิ่มเติม</span>
+                      </div>
                     </div>
                   ` : ''}
                 </div>
@@ -655,6 +663,56 @@ function escapeHtml(str) {
   const div = document.createElement('div');
   div.textContent = str;
   return div.innerHTML;
+}
+
+function openImagePreview(imageUrl, caption = '') {
+  let previewModal = document.getElementById('imagePreviewModal');
+  
+  if (!previewModal) {
+    previewModal = document.createElement('div');
+    previewModal.id = 'imagePreviewModal';
+    previewModal.style.cssText = `
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 99999;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 20px;
+    `;
+    previewModal.innerHTML = `
+      <div style="position: relative; max-width: 90vw; max-height: 85vh; display: flex; flex-direction: column; align-items: center;">
+        <button type="button" onclick="closeImagePreview()" style="position: absolute; top: -40px; right: -10px; background: none; border: none; color: #ffffff; font-size: 30px; font-weight: bold; cursor: pointer; line-height: 1;">✕</button>
+        <img id="previewModalImg" src="" style="max-width: 90vw; max-height: 80vh; object-fit: contain; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); background: #ffffff;">
+        <div id="previewModalCaption" style="color: #ffffff; font-size: 14px; margin-top: 12px; text-align: center; text-shadow: 0 1px 2px rgba(0,0,0,0.8);"></div>
+      </div>
+    `;
+    
+    // คลิกที่พื้นหลังสีดำเพื่อปิด
+    previewModal.addEventListener('click', (e) => {
+      if (e.target === previewModal) {
+        closeImagePreview();
+      }
+    });
+
+    document.body.appendChild(previewModal);
+  }
+
+  const imgEl = document.getElementById('previewModalImg');
+  const capEl = document.getElementById('previewModalCaption');
+  
+  imgEl.src = imageUrl;
+  capEl.textContent = caption;
+  previewModal.style.display = 'flex';
+}
+
+function closeImagePreview() {
+  const previewModal = document.getElementById('imagePreviewModal');
+  if (previewModal) {
+    previewModal.style.display = 'none';
+  }
 }
 
 loadGardens();

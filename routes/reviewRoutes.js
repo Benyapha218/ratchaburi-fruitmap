@@ -161,5 +161,3 @@ router.get('/reviews', async (req, res) => {
 });
 
 module.exports = router;
-module.exports.getReviewSummary = getReviewSummary;
-module.exports.getMonthlyAverage = getMonthlyAverage;

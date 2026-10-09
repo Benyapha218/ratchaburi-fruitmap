@@ -163,13 +163,13 @@
   }
 
   .cal-cell.has-pending:not(.selected) {
-    background: #4b6455;
+    background: #6c7273;
     color: #ffffff;
     font-weight: 700;
   }
 
   .cal-cell.has-approved:not(.selected) {
-    border: 2px solid #4b6455;
+    border: 2px solid #6c7273;
     font-weight: 600;
   }
 
@@ -314,6 +314,51 @@
 
   table.approved-table tr:last-child td {
     border-bottom: none;
+  }
+    .cal-nav-btn2 {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #7c5335;
+    color: #ffffff;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cal-nav-btn2:hover { background: #3a4f42; }
+
+  .approved-table-wrap2 {
+    background: #7c5335;
+    border-radius: 14px;
+    padding: 22px 26px 26px;
+    color: #ffffff;
+  }
+
+  .approved-header2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .approved-header .table-title {
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .approved-header2 .table-date {
+    font-size: 13px;
+    opacity: 0.9;
+  }
+
+  .approved-header .table-count {
+    font-size: 15px;
+    font-weight: 700;
   }
 
   .toolbar-empty-msg {
