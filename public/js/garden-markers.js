@@ -1,38 +1,9 @@
-/**
- * ไอคอนหมุดผลไม้บนแผนที่
- */
-const FRUIT_EMOJI_MAP = {
-  /*mango: '🥭',
-  mangosteen: '🟣',
-  grape: '🍇',
-  coconut: '🥥',*/
-  orange: '📍',
-  /*papaya: '🍈',
-  durian: '🌰',
-  default: '🌳'*/
-};
-
 function detectFruitEmoji(garden) {
-  const text = [
-    garden.products?.[0]?.name,
-    garden.garden_name,
-    garden.description
-  ].join(' ').toLowerCase();
-
-  /*if (text.includes('มะม่วง')) return FRUIT_EMOJI_MAP.mango;
-  if (text.includes('มังคุด')) return '🟣';
-  if (text.includes('องุ่น')) return FRUIT_EMOJI_MAP.grape;
-  if (text.includes('มะพร้าว')) return FRUIT_EMOJI_MAP.coconut;*/
-  if (text.includes('ส้ม')) return FRUIT_EMOJI_MAP.orange;
-  /*if (text.includes('มะละกอ')) return FRUIT_EMOJI_MAP.papaya;
-  if (text.includes('ทุเรียน')) return FRUIT_EMOJI_MAP.durian;
-  if (text.includes('ลำไย')) return '🍇';
-  if (text.includes('ลิ้นจี่')) return '🔴';*/
-  return FRUIT_EMOJI_MAP.default;
+  return '📍';
 }
 
 function createGardenMarkerIcon(L, garden, districtColor) {
-  const emoji = detectFruitEmoji(garden);
+  const emoji = '📍';
   const color = districtColor || '#166534';
 
   return L.divIcon({
@@ -54,8 +25,7 @@ function createGardenMarkerIcon(L, garden, districtColor) {
 }
 
 function listIconHtml(garden) {
-  const emoji = detectFruitEmoji(garden);
-  return `<div class="fruit-pin" aria-hidden="true">${emoji}</div>`;
+  return `<div class="fruit-pin" aria-hidden="true">📍</div>`;
 }
 
 function formatGardenAddress(garden) {
