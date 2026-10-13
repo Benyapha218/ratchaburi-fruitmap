@@ -67,7 +67,7 @@
   }
 
   nav.main-nav a.active {
-    background: #17663f;
+    background: #4b6455;
     color: #ffffff;
     padding: 8px 16px;
     border-radius: 8px;
@@ -75,7 +75,7 @@
   }
 
   nav.main-nav a:hover:not(.active) {
-    color: #17663f;
+    color: #4b6455;
   }
 
   .nav-icon {
