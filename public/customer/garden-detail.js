@@ -142,7 +142,7 @@ function openDetailModal(type, slotData = null) {
           ${offlineMarkets.map(m => `
             <div style="display: flex; justify-content: space-between; align-items: center; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 8px 12px;">
               <div style="font-size: 13.5px; font-weight: 600; color: #1e293b;">
-                🏪 ${escapeHtml(m.market || 'ไม่ระบุชื่อตลาด')}
+                ${escapeHtml(m.market || 'ไม่ระบุชื่อตลาด')}
               </div>
               ${m.route ? `
                 <a href="${escapeHtml(m.route)}" target="_blank" rel="noopener noreferrer" 
@@ -209,7 +209,7 @@ function openDetailModal(type, slotData = null) {
         <!-- ช่องทางออนไลน์ -->
         <div style="background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 14px 16px;">
           <div style="font-weight: 700; color: #17663f; font-size: 14px; display: flex; align-items: center; gap: 6px;">
-            🛒 ช่องทางการขายออนไลน์
+            ช่องทางการขายออนไลน์
           </div>
           ${onlineHtml}
         </div>
@@ -217,7 +217,7 @@ function openDetailModal(type, slotData = null) {
         <!-- ช่องทางออฟไลน์ / ตลาดส่งขาย -->
         <div style="background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 14px 16px;">
           <div style="font-weight: 700; color: #17663f; font-size: 14px; display: flex; align-items: center; gap: 6px;">
-            🚛 ช่องทางการขายออฟไลน์ / ตลาดส่งขาย
+            ช่องทางการขายออฟไลน์ / ตลาดส่งขาย
           </div>
           ${offlineHtml}
         </div>
