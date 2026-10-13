@@ -129,6 +129,7 @@ function openDetailModal(type, slotData = null) {
                 <th>ผลไม้</th>
                 <th>สายพันธุ์</th>
                 <th>เกรด</th>
+                <th>รายละเอียดเกรด</th>
                 <th>ราคาหน้าสวน</th>
                 <th>ราคาออนไลน์</th>
               </tr>
@@ -153,6 +154,7 @@ function openDetailModal(type, slotData = null) {
                   <td><strong>${escapeHtml(p.fruitName || '-')}</strong></td>
                   <td><strong>${escapeHtml(p.variety || '-')}</strong></td>
                   <td>${escapeHtml(p.grade || '-')}</td>
+                  <td>${escapeHtml(p.gradeDetail || '-')}</td>
                   <td>${p.priceOffline ? `฿${escapeHtml(String(p.priceOffline))} / ${escapeHtml(p.unitOffline || 'หน่วย')}` : '-'}</td>
                   <td>${p.priceOnline ? `฿${escapeHtml(String(p.priceOnline))} / ${escapeHtml(p.unitOnline || 'หน่วย')}` : '-'}</td>
                 </tr>
