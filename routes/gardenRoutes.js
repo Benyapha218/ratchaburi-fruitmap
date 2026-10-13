@@ -511,14 +511,20 @@ router.put('/gardens/:id/homestay', authMiddleware, upload.any(), async (req, re
       return res.status(result.error.status).json({ error: result.error.message });
     }
 
-    let homestays;
+    let homestays, deletedExistingImages, deletedExistingInteriors;
 
     try {
-      if (typeof req.body.homestays === 'string') {
-        homestays = JSON.parse(req.body.homestays || '[]');
-      } else {
-        homestays = req.body.homestays || [];
-      }
+      homestays = typeof req.body.homestays === 'string'
+        ? JSON.parse(req.body.homestays || '[]')
+        : (req.body.homestays || []);
+
+      deletedExistingImages = typeof req.body.deletedExistingImages === 'string'
+        ? JSON.parse(req.body.deletedExistingImages || '[]')
+        : (req.body.deletedExistingImages || []);
+
+      deletedExistingInteriors = typeof req.body.deletedExistingInteriors === 'string'
+        ? JSON.parse(req.body.deletedExistingInteriors || '[]')
+        : (req.body.deletedExistingInteriors || []);
     } catch (parseErr) {
       return res.status(400).json({ error: 'รูปแบบข้อมูลไม่ถูกต้อง' });
     }
@@ -530,13 +536,44 @@ router.put('/gardens/:id/homestay', authMiddleware, upload.any(), async (req, re
     const existingGarden = result.garden;
     const oldHomestays = existingGarden.homestays || [];
 
-      const homestaysWithMeta = homestays.map((h, idx) => {
+    const homestaysWithMeta = homestays.map((h, idx) => {
       const oldItem = oldHomestays[idx] || {};
-      
+
+      // 1. จัดการรูปภาพหลัก (images)
+      const existingImages = Array.isArray(oldItem.images) 
+        ? oldItem.images 
+        : (oldItem.image ? [oldItem.image] : []);
+      const deleteImgs = deletedExistingImages[idx] || [];
+      const remainingImages = existingImages.filter(img => !deleteImgs.includes(img));
+
+      // ดึงรูปใหม่ที่อัปโหลดผ่าน Multer
+      const newImages = (req.files || [])
+        .filter(f => f.fieldname === `homestayImages_${idx}`)
+        .map(f => `/uploads/${f.filename}`);
+
+      const combinedImages = [...remainingImages, ...newImages];
+
+      // 2. จัดการรูปภาพภายในห้อง (interiorImages)
+      const existingInteriors = Array.isArray(oldItem.interiorImages) 
+        ? oldItem.interiorImages 
+        : (oldItem.interiorImage ? [oldItem.interiorImage] : []);
+      const deleteInteriors = deletedExistingInteriors[idx] || [];
+      const remainingInteriors = existingInteriors.filter(img => !deleteInteriors.includes(img));
+
+      // ดึงรูปภายในใหม่ที่อัปโหลดผ่าน Multer
+      const newInteriors = (req.files || [])
+        .filter(f => f.fieldname === `homestayInteriorImages_${idx}`)
+        .map(f => `/uploads/${f.filename}`);
+
+      const combinedInteriors = [...remainingInteriors, ...newInteriors];
+
       return {
         ...oldItem,
         ...h,
-        roomCount: Number(h.roomCount) || 1, // 👈 แปลงค่า roomCount เป็นตัวเลข Number แท้ๆ ตรงนี้
+        roomCount: Number(h.roomCount) || 1,
+        image: combinedImages[0] || '', // เก็บรูปแรกไว้เป็นรูปหลัก
+        images: combinedImages,         // เก็บ array รูปภาพทั้งหมด
+        interiorImages: combinedInteriors, // เก็บ array รูปภายในห้อง
         statusMatrix: h.statusMatrix || oldItem.statusMatrix || [],
         availableDates: h.availableDates || oldItem.availableDates || [],
         added_by_email: req.user.email,
@@ -558,12 +595,12 @@ router.put('/gardens/:id/homestay', authMiddleware, upload.any(), async (req, re
     );
 
     res.json({
-      message: 'บันทึกสถานะห้องพักสำเร็จ',
+      message: 'บันทึกข้อมูล Homestay สำเร็จ',
       gardenId: req.params.id,
       homestayCount: homestaysWithMeta.length
     });
   } catch (err) {
-    console.error('Save homestay status error:', err);
+    console.error('Save homestay error:', err);
     res.status(500).json({ error: 'เกิดข้อผิดพลาดในการบันทึกข้อมูล กรุณาลองใหม่' });
   }
 });
