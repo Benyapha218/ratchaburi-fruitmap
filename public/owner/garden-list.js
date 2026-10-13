@@ -88,7 +88,6 @@ if (type === 'standard') {
                 <div style="font-weight: 700; color: #17663f; font-size: 15px; margin-bottom: 4px;">มาตรฐานที่ ${index + 1}</div>${std.reg_num ? `<div class="workshop-mini-title" style="font-size: 14px;"><strong>ชื่อมาตรฐาน:</strong> ${escapeHtml(std.reg_num)}</div>` : ''}
                 ${std.standard_detail ? `<div class="workshop-mini-desc" style="margin-top: 4px; font-size: 13px; color: #4b5563;"><strong>รายละเอียด:</strong> ${escapeHtml(std.standard_detail)}</div>` : ''}
                 
-                <!-- ส่วนแสดงรูปโลโก้และใบรับรอง -->
                 <div style="display: flex; gap: 16px; margin-top: 12px; flex-wrap: wrap; align-items: flex-start;">
                   ${logos.length > 0 ? `
                     <div>
@@ -140,7 +139,15 @@ if (type === 'standard') {
                 <tr>
                   <td>
                     ${p.image 
-                      ? `<img src="${escapeHtml(p.image)}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 6px; border: 1px solid #ddd; display: block;">` 
+                      ? `
+                        <div style="position: relative; display: inline-block; cursor: pointer;" 
+                             onclick="openImagePreview('${escapeHtml(p.image)}', '${escapeHtml(p.fruitName || 'ผลไม้')} (${escapeHtml(p.variety || 'ไม่ระบุสายพันธุ์')})')">
+                          <img src="${escapeHtml(p.image)}" 
+                               title="คลิกเพื่อดูภาพขนาดใหญ่"
+                               style="width: 50px; height: 50px; object-fit: cover; border-radius: 6px; border: 1px solid #ddd; display: block; transition: transform 0.15s ease;">
+                          <span style="position: absolute; bottom: 2px; right: 2px; background: rgba(0,0,0,0.65); color: #fff; font-size: 8px; padding: 1px 3px; border-radius: 3px; pointer-events: none;">ดูรูป</span>
+                        </div>
+                      ` 
                       : `<span style="color: #9ca3af; font-size: 12px;">ไม่มีรูป</span>`
                     }
                   </td>
@@ -218,7 +225,6 @@ if (type === 'standard') {
     if (homestaysList.length > 0) {
       setupHomestayGallery(homestaysList.length);
 
-      // ผูก Event ให้เมื่อคลิกรูปย่อย (Thumbnail) แล้วสลับรูปขึ้นไปแสดงข้างบนแทน
       homestaysList.forEach((_, index) => {
         const mainImg = document.getElementById(`mainHomestayImg_${index}`);
         const thumbs = document.querySelectorAll(`.thumb-img-${index}`);
@@ -522,15 +528,23 @@ function setupBookingBox(garden) {
 
     resultBox.innerHTML = matched.length === 0 
       ? `<div style="font-size:12.5px; color:#9ca3af; padding: 14px 0; text-align: center; background: #ffffff; border-radius: 8px; margin-top: 8px;">📅 ไม่มีรอบกิจกรรมในวันที่ ${escapeHtml(selectedDate)}</div>`
-      : `<div class="workshop-list">${matched.map(ws => `
-          <div class="workshop-mini-item">
-            ${ws.image ? `<img src="${ws.image}" alt="">` : ''}
-            <div class="workshop-mini-info">
-              <div class="workshop-mini-title">${escapeHtml(ws.workshop_name || ws.title || 'กิจกรรมสวน')}</div>
-              ${ws.startTime ? `<div class="workshop-mini-time">⏰ ${escapeHtml(ws.startTime)} - ${escapeHtml(ws.endTime || '')}</div>` : ''}
+      : `<div class="workshop-list">${matched.map(ws => {
+          const wsTitle = escapeHtml(ws.workshop_name || ws.title || 'กิจกรรมสวน');
+          return `
+            <div class="workshop-mini-item">
+              ${ws.image ? `
+                <div style="position: relative; cursor: pointer; flex-shrink: 0;" 
+                     onclick="openImagePreview('${escapeHtml(ws.image)}', 'กิจกรรม: ${wsTitle}')">
+                  <img src="${escapeHtml(ws.image)}" alt="${wsTitle}" title="คลิกเพื่อดูภาพขนาดใหญ่" style="display: block; border-radius: 6px; cursor: pointer;">
+                  <span style="position: absolute; bottom: 3px; right: 3px; background: rgba(0,0,0,0.65); color: #fff; font-size: 9px; padding: 1px 4px; border-radius: 3px; pointer-events: none;">ดูรูป</span>
+                </div>
+              ` : ''}
+              <div class="workshop-mini-info">
+                <div class="workshop-mini-title">${wsTitle}</div>${ws.startTime ? `<div class="workshop-mini-time">⏰ ${escapeHtml(ws.startTime)} - ${escapeHtml(ws.endTime || '')}</div>` : ''}
+              </div>
             </div>
-          </div>
-        `).join('')}</div>`;
+          `;
+        }).join('')}</div>`;
 
     if (matched2.length === 0) {
       bookingData.innerHTML = `<div style="font-size:12.5px; color:#9ca3af; padding: 14px 0; text-align: center; background: #ffffff; border-radius: 8px; margin-top: 8px;">🕒 ไม่มีการจองในวันที่ ${escapeHtml(selectedDate)}</div>`;
@@ -690,8 +704,7 @@ function openImagePreview(imageUrl, caption = '') {
       </div>
     `;
     
-    // คลิกที่พื้นหลังสีดำเพื่อปิด
-    previewModal.addEventListener('click', (e) => {
+  previewModal.addEventListener('click', (e) => {
       if (e.target === previewModal) {
         closeImagePreview();
       }
