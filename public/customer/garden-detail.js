@@ -117,11 +117,48 @@ function openDetailModal(type, slotData = null) {
     }
   } else if (type === 'price') {
     const products = Array.isArray(currentGarden.products) ? currentGarden.products : [];
-    title = 'ราคาผลไม้';
-    bodyHtml = products.length === 0
-      ? `<div style="font-size:12.5px; color:#9ca3af; padding: 14px 0; text-align: center; background: #ffffff; border-radius: 8px;">ยังไม่มีข้อมูลราคาผลไม้</div>`
+    const onlineChannels = Array.isArray(currentGarden.online_channels) ? currentGarden.online_channels : [];
+    const offlineMarkets = Array.isArray(currentGarden.offline_markets) ? currentGarden.offline_markets : [];
+
+    title = 'ราคาผลไม้และช่องทางการจำหน่าย';
+
+    const channelNames = {
+      facebook: '🔵 Facebook',
+      line: '🟢 LINE',
+    };
+
+    const onlineHtml = onlineChannels.length > 0
+      ? `<div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px;">
+          ${onlineChannels.map(ch => {
+            const key = String(ch).toLowerCase();
+            const label = channelNames[key] || escapeHtml(ch);
+            return `<span style="background: #eef2f6; color: #1e293b; font-size: 13px; font-weight: 500; padding: 4px 10px; border-radius: 20px; border: 1px solid #cbd5e1;">${label}</span>`;
+          }).join('')}
+         </div>`
+      : `<span style="font-size: 13px; color: #9ca3af;">ไม่มีข้อมูลช่องทางออนไลน์</span>`;
+
+    const offlineHtml = offlineMarkets.length > 0
+      ? `<div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
+          ${offlineMarkets.map(m => `
+            <div style="display: flex; justify-content: space-between; align-items: center; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 8px 12px;">
+              <div style="font-size: 13.5px; font-weight: 600; color: #1e293b;">
+                🏪 ${escapeHtml(m.market || 'ไม่ระบุชื่อตลาด')}
+              </div>
+              ${m.route ? `
+                <a href="${escapeHtml(m.route)}" target="_blank" rel="noopener noreferrer" 
+                   style="font-size: 12.5px; color: #15803d; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 3px; background: #e7f5eb; padding: 4px 8px; border-radius: 6px;">
+                  📍 เส้นทาง / แผนที่
+                </a>
+              ` : ''}
+            </div>
+          `).join('')}
+         </div>`
+      : `<span style="font-size: 13px; color: #9ca3af;">ไม่มีข้อมูลตลาดส่งขาย</span>`;
+
+    const tableHtml = products.length === 0
+      ? `<div style="font-size:12.5px; color:#9ca3af; padding: 14px 0; text-align: center; background: #ffffff; border-radius: 8px; margin-bottom: 16px;">ยังไม่มีข้อมูลราคาผลไม้</div>`
       : `
-        <div class="table-responsive">
+        <div class="season-table-wrap" style="margin-bottom: 20px;">
           <table class="season-table">
             <thead>
               <tr>
@@ -137,7 +174,7 @@ function openDetailModal(type, slotData = null) {
             <tbody>
               ${products.map(p => `
                 <tr>
-                <td>
+                  <td>
                     ${p.image 
                       ? `
                         <div style="position: relative; display: inline-block; cursor: pointer;" 
@@ -163,6 +200,29 @@ function openDetailModal(type, slotData = null) {
           </table>
         </div>
       `;
+
+    bodyHtml = `
+      ${tableHtml}
+      
+      <!-- ส่วนข้อมูลช่องทางการจำหน่ายด้านล่างตาราง -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 10px;">
+        <!-- ช่องทางออนไลน์ -->
+        <div style="background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 14px 16px;">
+          <div style="font-weight: 700; color: #17663f; font-size: 14px; display: flex; align-items: center; gap: 6px;">
+            🛒 ช่องทางการขายออนไลน์
+          </div>
+          ${onlineHtml}
+        </div>
+
+        <!-- ช่องทางออฟไลน์ / ตลาดส่งขาย -->
+        <div style="background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 14px 16px;">
+          <div style="font-weight: 700; color: #17663f; font-size: 14px; display: flex; align-items: center; gap: 6px;">
+            🚛 ช่องทางการขายออฟไลน์ / ตลาดส่งขาย
+          </div>
+          ${offlineHtml}
+        </div>
+      </div>
+    `;
   } else if (type === 'homestay') {
     const homestaysList = Array.isArray(currentGarden.homestays) ? currentGarden.homestays : [];
     title = 'ข้อมูล Homestay';
