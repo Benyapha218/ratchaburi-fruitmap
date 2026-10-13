@@ -184,7 +184,7 @@ router.put('/gardens/:id', authMiddleware, upload.fields([
     }
 
     if (req.files?.images?.length > 0) {
-      const newImagePaths = req.files.images.map(file => `/uploads/${file.filename}`);
+      const newImagePaths = req.files.images.map(file => file.path);
       finalImages = finalImages.concat(newImagePaths);
     }
 
@@ -243,7 +243,7 @@ router.put('/gardens/:id/standards', authMiddleware, upload.any(), async (req, r
     logoFiles.forEach((file, i) => {
       const stdIdx = logoIndexes[i];
       if (standards[stdIdx]) {
-        standards[stdIdx].logo_images = [`/uploads/${file.filename}`];
+        standards[stdIdx].logo_images = [file.path];
       }
     });
 
@@ -251,7 +251,7 @@ router.put('/gardens/:id/standards', authMiddleware, upload.any(), async (req, r
     certFiles.forEach((file, i) => {
       const stdIdx = certIndexes[i];
       if (standards[stdIdx]) {
-        standards[stdIdx].certificates = [`/uploads/${file.filename}`];
+        standards[stdIdx].certificates = [file.path];
       }
     });
 
@@ -343,7 +343,7 @@ router.put('/gardens/:id/products', authMiddleware, upload.array('productImages'
     (req.files || []).forEach((file, i) => {
       const productIndex = productImageIndexes[i];
       if (products[productIndex]) {
-        products[productIndex].image = `/uploads/${file.filename}`;
+        products[productIndex].image = file.path;
       }
     });
 
@@ -419,7 +419,7 @@ router.put('/gardens/:id/workshops', authMiddleware, upload.array('workshopImage
     (req.files || []).forEach((file, i) => {
       const workshopIndex = workshopImageIndexes[i];
       if (workshops[workshopIndex]) {
-        workshops[workshopIndex].image = `/uploads/${file.filename}`;
+        workshops[workshopIndex].image = file.path;
       }
     });
 
@@ -549,7 +549,7 @@ router.put('/gardens/:id/homestay', authMiddleware, upload.any(), async (req, re
       // ดึงรูปใหม่ที่อัปโหลดผ่าน Multer
       const newImages = (req.files || [])
         .filter(f => f.fieldname === `homestayImages_${idx}`)
-        .map(f => `/uploads/${f.filename}`);
+        .map(f => f.path);
 
       const combinedImages = [...remainingImages, ...newImages];
 
@@ -560,10 +560,9 @@ router.put('/gardens/:id/homestay', authMiddleware, upload.any(), async (req, re
       const deleteInteriors = deletedExistingInteriors[idx] || [];
       const remainingInteriors = existingInteriors.filter(img => !deleteInteriors.includes(img));
 
-      // ดึงรูปภายในใหม่ที่อัปโหลดผ่าน Multer
       const newInteriors = (req.files || [])
         .filter(f => f.fieldname === `homestayInteriorImages_${idx}`)
-        .map(f => `/uploads/${f.filename}`);
+        .map(f => f.path);
 
       const combinedInteriors = [...remainingInteriors, ...newInteriors];
 
