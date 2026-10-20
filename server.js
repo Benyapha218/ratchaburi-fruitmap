@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const path = require('path'); // <-- จุดที่ 1: เพิ่ม path module ตรงนี้
+const path = require('path');
 const connectDB = require('./config/db');
 const ownerRoutes = require('./routes/ownerRoutes');
 const gardenRoutes = require('./routes/gardenRoutes');
